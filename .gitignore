@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+.vscode/
+
+# IDE settings
+.idea/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Package files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Temporary files
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Local configuration files
+local_settings.py
+
+# Environment variables
+.env
+.env.local
+
+# Dependency directories
+node_modules/
