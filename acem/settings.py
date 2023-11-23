@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
+import os
+ENV_FILE = BASE_DIR / '.env'
+print(ENV_FILE)
+load_dotenv(ENV_FILE)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -73,14 +75,23 @@ WSGI_APPLICATION = 'acem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DASHBOARD_POSTGRES_DB'],
+        'USER': os.environ['DASHBOARD_POSTGRES_USER'],
+        'PASSWORD': os.environ['DASHBOARD_POSTGRES_PASSWORD'],
+        'HOST': os.environ['DASHBOARD_POSTGRES_IP'],
+        'PORT': os.environ['DASHBOARD_POSTGRES_PORT']
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

@@ -1,24 +1,26 @@
 version: '3'
 
 services:
-  db:
+  postgres:
     image: postgres
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: mydatabaseuser
-      POSTGRES_PASSWORD: mydatabasepassword
+      - POSTGRES_USER=${DASHBOARD_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DASHBOARD_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DASHBOARD_POSTGRES_DB}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data/
 
   web:
-    build: .
+    image: acem:1.0
     command: ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     depends_on:
-      - db
+      - postgres
 
 volumes:
   postgres_data:
